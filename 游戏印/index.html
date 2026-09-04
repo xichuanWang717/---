@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>青韵印｜青瓷创作器</title>
+  <link rel="stylesheet" href="creator.css?rev=studio-43">
+</head>
+<body>
+  <header class="topbar">
+    <strong>青韵印</strong>
+  </header>
+
+  <section class="cover" id="cover">
+    <div class="cover-glow"></div>
+    <div class="cover-vessel" aria-hidden="true">
+      <img class="cover-vase-image" src="assets/craft/cover-celadon-vase-cutout.png" alt="">
+      <svg class="cover-vase-svg" viewBox="0 0 260 310" role="img">
+        <defs>
+          <linearGradient id="coverBodyGlaze" x1="40" y1="52" x2="214" y2="276" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#e1f4e7"/>
+            <stop offset=".34" stop-color="#a5cdb8"/>
+            <stop offset=".68" stop-color="#6e9d8f"/>
+            <stop offset="1" stop-color="#355f58"/>
+          </linearGradient>
+          <radialGradient id="coverBodyLight" cx="36%" cy="24%" r="58%">
+            <stop offset="0" stop-color="#f8fff1" stop-opacity=".58"/>
+            <stop offset=".38" stop-color="#d9eee0" stop-opacity=".16"/>
+            <stop offset="1" stop-color="#0b2c27" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="coverRimGlaze" x1="64" y1="32" x2="198" y2="78" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#f1faee"/>
+            <stop offset=".5" stop-color="#aacbb9"/>
+            <stop offset="1" stop-color="#426c62"/>
+          </linearGradient>
+          <linearGradient id="coverNeckGlaze" x1="104" y1="58" x2="156" y2="112" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#c9e5d4"/>
+            <stop offset=".52" stop-color="#8fb9a7"/>
+            <stop offset="1" stop-color="#5f8a7d"/>
+          </linearGradient>
+          <filter id="coverSoftShadow" x="-30%" y="-30%" width="160%" height="170%">
+            <feGaussianBlur stdDeviation="7"/>
+          </filter>
+        </defs>
+        <ellipse class="cover-vase-shadow" cx="130" cy="284" rx="88" ry="20"/>
+        <path class="cover-vase-neck" d="M103 58 C105 75 107 93 110 110 C119 117 141 117 150 110 C153 93 155 75 157 58 C144 64 116 64 103 58 Z"/>
+        <path class="cover-vase-body" d="M86 113 C93 98 111 92 130 93 C149 92 167 98 174 113 C195 132 211 160 207 198 C202 246 177 276 148 284 C136 288 124 288 112 284 C83 276 58 246 53 198 C49 160 65 132 86 113 Z"/>
+        <path class="cover-vase-light" d="M86 113 C93 98 111 92 130 93 C149 92 167 98 174 113 C195 132 211 160 207 198 C202 246 177 276 148 284 C136 288 124 288 112 284 C83 276 58 246 53 198 C49 160 65 132 86 113 Z"/>
+        <path class="cover-vase-side" d="M166 111 C192 136 207 167 202 204 C197 250 174 275 148 284 C161 254 166 218 165 180 C164 151 160 128 166 111 Z"/>
+        <path class="cover-vase-shoulder" d="M87 115 C105 126 155 126 173 115"/>
+        <ellipse class="cover-vase-rim" cx="130" cy="56" rx="39" ry="13"/>
+        <ellipse class="cover-vase-mouth" cx="130" cy="56" rx="27" ry="8"/>
+        <path class="cover-vase-highlight" d="M78 145 C105 128 155 129 182 146" pathLength="1"/>
+        <path class="cover-vase-crackle" d="M89 176 C107 164 122 179 141 167 C155 158 169 166 183 158" pathLength="1"/>
+        <path class="cover-vase-foot" d="M101 281 C118 289 142 289 159 281"/>
+      </svg>
+    </div>
+    <p class="eyebrow">YUE KILN MAKER</p>
+    <h1>做一件青瓷</h1>
+    <p>从泥、纹、釉、火开始，完成一件属于你的越窑青瓷。</p>
+    <button id="coverStart" type="button">开始创作</button>
+  </section>
+
+  <main class="studio" id="studio">
+    <section class="intro">
+      <p class="eyebrow">YUE KILN MAKER</p>
+      <h1>做一件青瓷</h1>
+      <p id="stageLine">先定器骨，再让纹样、釉色和火候慢慢进入同一件作品。</p>
+    </section>
+
+    <section class="status" aria-label="创作进度">
+      <div class="status-row">
+        <span id="shapeTag">碗</span>
+        <span id="patternTag">未刻纹</span>
+        <span id="glazeTag">素胎</span>
+        <span id="fireTag">未入窑</span>
+      </div>
+      <div class="progress-track"><i id="progressFill"></i></div>
+    </section>
+
+    <section class="workbench" aria-label="青瓷创作台">
+      <div class="kiln-aura" id="kilnAura"></div>
+      <div class="wheel"></div>
+      <button class="seal-view-toggle" id="sealViewToggle" type="button" aria-pressed="false">印面</button>
+      <canvas class="three-stage" id="threeStage" aria-label="3D青瓷创作器"></canvas>
+      <div class="artifact" id="artifact" data-shape="bowl" data-pattern="none" data-glaze="raw" data-fire="none">
+        <span class="rim"></span>
+        <span class="body"></span>
+        <span class="motif motif-lotus"></span>
+        <span class="motif motif-wave"></span>
+        <span class="motif motif-cloud"></span>
+        <span class="shine"></span>
+        <span class="shadow"></span>
+      </div>
+      <div class="craft-burst" id="craftBurst">泥性稳定</div>
+    </section>
+
+    <section class="control-deck">
+      <div class="process-title">
+        <b>四道工序</b>
+        <span>泥 → 纹 → 釉 → 火</span>
+      </div>
+      <nav class="tabs" aria-label="创作阶段">
+        <button class="active" data-tab="clay">泥</button>
+        <button data-tab="pattern">纹</button>
+        <button data-tab="glaze">釉</button>
+        <button data-tab="kiln">火</button>
+      </nav>
+
+      <div class="panel active" data-panel="clay">
+        <div class="panel-head">
+          <b>定胎骨</b>
+          <span>选择器形或章形，完成三次手作。</span>
+        </div>
+        <div class="option-grid six shape-grid">
+          <button class="selected" data-choice="shape" data-value="bowl"><i class="thumb form bowl"></i><span>碗</span></button>
+          <button data-choice="shape" data-value="jar"><i class="thumb form jar"></i><span>罐</span></button>
+          <button data-choice="shape" data-value="cup"><i class="thumb form cup"></i><span>盏</span></button>
+          <button data-choice="shape" data-value="seal-square"><i class="thumb form seal-square"></i><span>方章</span></button>
+          <button data-choice="shape" data-value="seal-round"><i class="thumb form seal-round"></i><span>圆章</span></button>
+          <button data-choice="shape" data-value="seal-rect"><i class="thumb form seal-rect"></i><span>长方章</span></button>
+        </div>
+        <div class="action-row" data-actions="clay">
+          <button data-action="wash">淘泥</button>
+          <button data-action="pull">成型</button>
+          <button data-action="trim">修边</button>
+        </div>
+      </div>
+
+      <div class="panel" data-panel="pattern">
+        <div class="panel-head">
+          <b>刻纹样</b>
+          <span>纹样会直接长到当前器物上。</span>
+        </div>
+        <div class="option-grid four pattern-grid">
+          <button class="selected" data-choice="pattern" data-value="none"><i class="thumb pattern none"></i><span>无纹</span></button>
+          <button data-choice="pattern" data-value="lotus"><i class="thumb pattern lotus"></i><span>莲瓣</span></button>
+          <button data-choice="pattern" data-value="wave"><i class="thumb pattern wave"></i><span>水波</span></button>
+          <button data-choice="pattern" data-value="cloud"><i class="thumb pattern cloud"></i><span>云纹</span></button>
+          <button data-choice="pattern" data-value="pinch"><i class="thumb pattern pinch"></i><span>手捏</span></button>
+        </div>
+        <div class="craft-step-label">纹的工艺操作</div>
+        <div class="action-row" data-actions="pattern">
+          <button data-action="cut">起刀</button>
+          <button data-action="trace">走线</button>
+          <button data-action="settle">收纹</button>
+        </div>
+      </div>
+
+      <div class="panel" data-panel="glaze">
+        <div class="panel-head">
+          <b>覆青釉</b>
+          <span>釉色、厚度和光泽会一起变化。</span>
+        </div>
+        <div class="option-grid four">
+          <button data-choice="glaze" data-value="pale"><i class="swatch pale"></i><span>淡青</span></button>
+          <button class="selected" data-choice="glaze" data-value="lake"><i class="swatch lake"></i><span>湖青</span></button>
+          <button data-choice="glaze" data-value="green"><i class="swatch green"></i><span>青绿</span></button>
+          <button data-choice="glaze" data-value="gray"><i class="swatch gray"></i><span>青灰</span></button>
+        </div>
+        <div class="action-row" data-actions="glaze">
+          <button data-action="first">初施</button>
+          <button data-action="rest">静置</button>
+          <button data-action="second">复施</button>
+        </div>
+      </div>
+
+      <div class="panel" data-panel="kiln">
+        <div class="panel-head">
+          <b>看火候</b>
+          <span>火候决定最后的青色和重量感。</span>
+        </div>
+        <div class="option-grid three">
+          <button data-choice="fire" data-value="low"><i class="fire-dot low"></i><span>低火</span></button>
+          <button class="selected" data-choice="fire" data-value="medium"><i class="fire-dot medium"></i><span>适中</span></button>
+          <button data-choice="fire" data-value="high"><i class="fire-dot high"></i><span>高火</span></button>
+        </div>
+        <div class="qte-panel" id="qtePanel" data-open="false" aria-hidden="true">
+          <div class="qte-copy">
+            <b id="qteTitle">火候判定</b>
+            <span id="qteHint">指针进入金色区间时点击</span>
+          </div>
+          <button class="qte-track" id="qteTrack" type="button" aria-label="火候时机判定">
+            <i class="qte-zone good"></i>
+            <i class="qte-zone excellent"></i>
+            <i class="qte-zone perfect"></i>
+            <i class="qte-pointer" id="qtePointer"></i>
+          </button>
+        </div>
+        <div class="action-row" data-actions="kiln">
+          <button data-action="feed">添柴</button>
+          <button data-action="seal">封窑</button>
+          <button data-action="wait">候温</button>
+        </div>
+      </div>
+
+      <button class="finish-btn" id="finishBtn">烧成作品</button>
+    </section>
+  </main>
+
+  <section class="result-sheet" id="resultSheet" hidden>
+    <div class="sheet-card">
+      <p class="eyebrow">YOUR CELADON</p>
+      <h2 id="resultTitle">湖青莲瓣碗</h2>
+      <label class="name-field" for="resultNameInput">
+        <span>给这件作品起名</span>
+        <input id="resultNameInput" type="text" maxlength="18" placeholder="输入你的名字">
+      </label>
+      <p id="resultDesc">这件作品已经完成。</p>
+      <p class="result-review" id="resultReview">评价会在烧成后生成。</p>
+      <p class="result-value" id="resultValue">估值会在烧成后生成。</p>
+      <div class="sheet-actions">
+        <button id="againBtn">再做一件</button>
+        <button id="saveBtn">保存作品</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="toast" id="toast">作品已保存</div>
+    <script src="app.js?rev=portfolio-game-2"></script>
+    <script type="module" src="three-maker.js?rev=three-70"></script>
+</body>
+</html>
